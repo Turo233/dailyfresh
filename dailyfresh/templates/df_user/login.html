@@ -1,0 +1,70 @@
+{% extends 'base_foot.html' %}
+
+{% block head %}
+<script type="text/javascript" >
+	$(function(){
+		uname_error = 0
+		upwd_error = 0
+
+		if ({{uname_error}} == 1) {
+		    $(".user_error").html("用户名不存在").show()
+		}
+		if ({{upwd_error}} == 1) {
+		    $(".pwd_error").html("密码输入有误， 请重新输入").show()
+		}
+
+		$(".name_input").blur(function(){
+		    var len = $('.name_input').val().length;
+			if(len<5||len>20)
+			{
+				$('.name_input').next().html('请输入5-20个字符的户名').show();
+				error_name = true;
+			}else {
+
+				$('.name_input').next().hide();
+				error_name = false;
+			}
+
+		})
+
+
+
+
+
+
+	})
+
+</script>
+{% endblock head %}
+{% block body %}
+	<div class="login_top clearfix">
+		<a href="index.html" class="login_logo"><img src="/static/images/logo02.png"></a>
+	</div>
+
+	<div class="login_form_bg">
+		<div class="login_form_wrap clearfix">
+			<div class="login_banner fl"></div>
+			<div class="slogan fl">日夜兼程 · 急速送达</div>
+			<div class="login_form fr">
+				<div class="login_title clearfix">
+					<h1>用户登录</h1>
+					<a href="/user/register/">立即注册</a>
+				</div>
+				<div class="form_input">
+					<form action="/user/login_handle/" method="post">
+						<input type="text" name="username" class="name_input" value="{{namevalue}}" placeholder="请输入用户名">
+						<div class="user_error">输入错误</div>
+						<input type="password" name="pwd" class="pass_input" value="{{pwdvalue}}"  placeholder="请输入密码">
+						<div class="pwd_error">输入错误</div>
+						<div class="more_input clearfix">
+							<input type="checkbox" name="checkbox" value="1" checked>
+							<label>记住用户名</label>
+							<a href="#">忘记密码</a>
+						</div>
+						<input type="submit" name="" value="登录" class="input_submit">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock body %}
