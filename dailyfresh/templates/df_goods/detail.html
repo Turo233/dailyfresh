@@ -1,0 +1,125 @@
+{% extends 'df_goods/base.html' %}
+{% block linkscript %}
+    <script type="text/javascript" >
+    $(function(){
+        var num = parseFloat($(".num_show").val())
+        var price = parseFloat($(".show_pirze em").text())
+
+        $(".num_show").blur(function(){
+            show()
+        })
+        $(".add").click(function(){
+            num = num + 1
+            show()
+        })
+        $(".minus").click(function(){
+            if (num > 0){
+            num = num - 1
+            }
+            show()
+        })
+        function show(){
+            var total = num * price
+            $(".num_show").val(num)
+            $(".num_name span").text(num)
+            $(".total em span").text(total.toFixed(2))
+        }
+    })
+
+    </script>
+{% endblock linkscript %}
+    {% block others %}
+	<div class="breadcrumb">
+		<a href="#">全部分类</a>
+		<span>></span>
+		<a href="\list_{{ goodinfo.goods_type.id }}_1_1">{{ goodinfo.goods_type.type_title }}</a>
+		<span>></span>
+		<a href="#">商品详情</a>
+	</div>
+
+	<div class="goods_detail_con clearfix">
+		<div class="goods_detail_pic fl"><img src="{{ goodinfo.goods_pic }}"></div>
+
+		<div class="goods_detail_list fr">
+			<h3>{{ goodinfo.goods_title|slice:'5' }}</h3>
+			<p>{{ goodinfo.goods_detail }}</p>
+			<div class="prize_bar">
+				<span class="show_pirze">¥<em>{{ goodinfo.goods_price }}</em></span>
+				<span class="show_unit">单  位：{{ goodinfo.goods_unit }}</span>
+			</div>
+			<div class="goods_num clearfix">
+				<div class="num_name fl">数 量：<span>1</span></div>
+				<div class="num_add fl">
+					<input type="text" class="num_show fl" value="1">
+					<a href="javascript:;" class="add fr">+</a>
+					<a href="javascript:;" class="minus fr">-</a>	
+				</div> 
+			</div>
+			<div class="total">总价：<em><span>{{ goodinfo.goods_price }}</span>元</em></div>
+			<div class="operate_btn">
+				<a href="javascript:;" class="buy_btn">立即购买</a>
+				<a href="javascript:;" class="add_cart" id="add_cart">加入购物车</a>				
+			</div>
+		</div>
+	</div>
+
+	<div class="main_wrap clearfix">
+		<div class="l_wrap fl clearfix">
+			<div class="new_goods">
+				<h3>新品推荐</h3>
+				<ul>
+                    {% for each in news %}
+					<li>
+						<a href="\{{ each.id }}"><img src="{{ each.goods_pic }}"></a>
+						<h4><a href="\{{ each.id }}">{{ each.goods_title|slice:'5' }}</a></h4>
+						<div class="prize">{{ each.goods_price }}</div>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<div class="r_wrap fr clearfix">
+			<ul class="detail_tab clearfix">
+				<li class="active">商品介绍</li>
+				<li>评论</li>
+			</ul>
+
+			<div class="tab_content">
+				<dl>
+					<dt>商品详情：</dt>
+                    <dd>{{ goodinfo.goods_intru }}</dd>
+				</dl>
+			</div>
+
+		</div>
+	</div>
+    {% endblock others %}
+
+    {% block script_foot %}
+        <div class="add_jump"></div>
+
+	<script type="text/javascript" src="js/jquery-1.12.2.js"></script>
+	<script type="text/javascript">
+		var $add_x = $('#add_cart').offset().top;
+		var $add_y = $('#add_cart').offset().left;
+
+		var $to_x = $('#show_count').offset().top;
+		var $to_y = $('#show_count').offset().left;
+
+		$(".add_jump").css({'left':$add_y+80,'top':$add_x+10,'display':'block'})
+		$('#add_cart').click(function(){
+			$(".add_jump").stop().animate({
+				'left': $to_y+7,
+				'top': $to_x+7},
+				"fast", function() {
+					$(".add_jump").fadeOut('fast',function(){
+						$('#show_count').html(2);
+					});
+
+			});
+		})
+	</script>
+
+    {% endblock script_foot %}
+
