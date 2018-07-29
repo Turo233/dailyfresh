@@ -73,11 +73,11 @@ def info(request):
     uid = request.session.get('userid')
     uname = request.session.get('uname')
     user = UserInfo.objects.get(id=uid)
-    content = {'title':'用户中心', 'uname':uname, 'uphone':user.uphone, 'uaddress':user.uaddress}
+    content = {'title':'用户中心', 'user_page':1, 'uname':uname, 'uphone':user.uphone, 'uaddress':user.uaddress}
     return render(request, 'df_user/user_center_info.html', content)
 
 def order(request):
-    content = {'title':'用户中心'}
+    content = {'title':'用户中心', 'user_page':1}
     return render(request, 'df_user/user_center_order.html', content)
 def site(request):
     user = UserInfo.objects.get(id=request.session.get('userid'))
@@ -89,7 +89,7 @@ def site(request):
         user.upost = post.get('stamp_no')
         user.save()
         # phone_num = phone_num[0:3] + 'xxxx' + phone_num[7:11]
-    content = {'title':'用户中心', 'user':user}
+    content = {'title':'用户中心', 'user':user, 'user_page':1}
     return render(request, 'df_user/user_center_site.html', content)
 # def site_addinfo(request):
 #
