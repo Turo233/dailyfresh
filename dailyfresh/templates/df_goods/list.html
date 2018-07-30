@@ -1,4 +1,5 @@
 {% extends 'df_goods/base.html' %}
+{% load custom_filter %}
 {% block others %}
 
 
@@ -16,7 +17,7 @@
                     {% for item in news %}
                     <li>
                         <a href="\{{ item.id }}"><img src="{{ item.goods_pic }}"></a>
-                        <h4><a href="\{{ item.id }}">{{ item.goods_title|slice:'5' }}</a></h4>
+                        <h4><a href="\{{ item.id }}">{{ item.goods_title|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
                         <div class="prize">{{ item.goods_price }}</div>
                     </li>
 					{% endfor %}
@@ -44,8 +45,8 @@
 			<ul class="goods_type_list clearfix">
 				{% for each in page %}
                 <li>
-                    <a href="\{{ each.id }}"><img src="{{ each.goods_pic }}" alt="{{ each.goods_title|slice:'5' }}"></a>
-                    <h4><a href="\{{ each.id }}">{{ each.goods_title|slice:'5' }}</a></h4>
+                    <a href="\{{ each.id }}"><img src="{{ each.goods_pic }}" alt="{{ each.goods_title|F_delete_num|cut:'爱鲜蜂·' }}"></a>
+                    <h4><a href="\{{ each.id }}">{{ each.goods_title|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
                     <div class="operate">
                         <span class="prize">{{ each.goods_price }}</span>
                         <span class="unit">{{ each.goods_unit }}</span>

@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from .models import TypeInfo
 from .models import GoodsInfo
 # Create your views here.
+
 def index(request):
     TypeInfo_list = TypeInfo.objects.all()
     id_1_info = TypeInfo_list[0].goodsinfo_set.order_by('-id')[0:4]
@@ -47,12 +48,29 @@ def detail(request, goods_id):
     goodinfo = GoodsInfo.objects.get(id=int(goods_id))
     goodinfo.goods_click += 1
     goodinfo.save()
+
     news = goodinfo.goods_type.goodsinfo_set.order_by('-id')[0:2]
     content = {
         'title':goodinfo.goods_type.type_title,
         'market_page': 1,
         'news':news,
         'goodinfo': goodinfo,
-
     }
-    return render(request, 'df_goods/detail.html', content)
+    response = render(request, 'df_goods/detail.html', content)
+
+    # 用户最近浏览
+    goods_id_list = request.COOKIES.get('goods_ids', '')
+    goods_id = str(goodinfo.id)
+    if goods_id_list != '':
+        id_list = goods_id_list.split(',')
+        print("*"*29,id_list, goods_id)
+        if id_list.count(goods_id) >= 1:
+            id_list.remove(goods_id)
+        id_list.insert(0,goods_id)
+        if len(id_list) >= 6:
+            id_list.pop(-1)
+        goods_id_list = ','.join(id_list)
+    else:
+        goods_id_list = goods_id
+    response.set_cookie('goods_ids',goods_id_list)
+    return response

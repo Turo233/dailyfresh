@@ -1,11 +1,14 @@
 {% extends 'df_goods/base.html' %}
+{% load custom_filter %}
 {% block linkscript %}
     <script type="text/javascript" >
     $(function(){
-        var num = parseFloat($(".num_show").val())
+        var num = parseInt($(".num_show").val())
         var price = parseFloat($(".show_pirze em").text())
 
         $(".num_show").blur(function(){
+            num = parseInt($(".num_show").val())
+
             show()
         })
         $(".add").click(function(){
@@ -41,8 +44,8 @@
 		<div class="goods_detail_pic fl"><img src="{{ goodinfo.goods_pic }}"></div>
 
 		<div class="goods_detail_list fr">
-			<h3>{{ goodinfo.goods_title|slice:'5' }}</h3>
-			<p>{{ goodinfo.goods_detail }}</p>
+			<h3>{{ goodinfo.goods_title|F_delete_num|cut:'爱鲜蜂·' }}</h3>
+			<p>{{ goodinfo.goods_detail|cut:'爱鲜蜂·' }}</p>
 			<div class="prize_bar">
 				<span class="show_pirze">¥<em>{{ goodinfo.goods_price }}</em></span>
 				<span class="show_unit">单  位：{{ goodinfo.goods_unit }}</span>
@@ -71,7 +74,7 @@
                     {% for each in news %}
 					<li>
 						<a href="\{{ each.id }}"><img src="{{ each.goods_pic }}"></a>
-						<h4><a href="\{{ each.id }}">{{ each.goods_title|slice:'5' }}</a></h4>
+						<h4><a href="\{{ each.id }}">{{ each.goods_title|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
 						<div class="prize">{{ each.goods_price }}</div>
 					</li>
 					{% endfor %}
@@ -114,7 +117,7 @@
 				'top': $to_x+7},
 				"fast", function() {
 					$(".add_jump").fadeOut('fast',function(){
-						$('#show_count').html(2);
+						$('#show_count').html(0);
 					});
 
 			});

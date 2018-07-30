@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^info/$', views.info),
     url(r'^site/$', views.site),
     url(r'^order/$', views.order),
+    url(r'^logout/$', views.logout)
     # url(r'^site_addinfo/$', views.site_addinfo)
 ]

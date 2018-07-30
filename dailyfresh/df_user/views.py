@@ -1,7 +1,11 @@
+import sys
+sys.path.append('..')
 from django.shortcuts import render, redirect
 from hashlib import sha1
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from .models import UserInfo
+from . import user_decorater
+from df_goods.views import GoodsInfo
 # Create your views here.
 def register(request):
     return render(request, 'df_user/register.html')
@@ -39,6 +43,10 @@ def login(request):
     content = {"title": "用户登录", 'uname_error': 0, 'upwd_error': 0, 'uname':uname, 'namevalue': uname}
     return render(request, 'df_user/login.html', content)
 
+def logout(request):
+    request.session.flush()
+    return redirect('/')
+
 def login_handle(request):
     post = request.POST
     uname = post.get("username")
@@ -51,8 +59,9 @@ def login_handle(request):
         s1 = sha1()
         s1.update(upwd.encode("utf-8"))
         if s1.hexdigest() == users[0].upwd:
+            url = request.COOKIES.get('url','/index')
             #密码验证成功， 转到info界面， 判断是否需要存cookie
-            red = HttpResponseRedirect('/user/info/')
+            red = HttpResponseRedirect(url)
             if ucheck:
                 red.set_cookie('uname',uname)
             else:
@@ -68,17 +77,34 @@ def login_handle(request):
         return render(request, 'df_user/login.html', content)
 
     return render(request, 'df_user/login.html', content)
-
+@user_decorater.login
 def info(request):
+    lasted_view = request.COOKIES.get('goods_ids', '')
+    views_list = []
+    if lasted_view != '':
+        good_list = lasted_view.split(',')
+        # good_list = map(lambda x: int(x), good_list)
+        for each in good_list:
+            good_info = GoodsInfo.objects.get(id=int(each))
+            views_list.append(good_info)
+
     uid = request.session.get('userid')
     uname = request.session.get('uname')
     user = UserInfo.objects.get(id=uid)
-    content = {'title':'用户中心', 'user_page':1, 'uname':uname, 'uphone':user.uphone, 'uaddress':user.uaddress}
+    content = {'title':'用户中心',
+               'user_page':1,
+               'uname':uname,
+               'uphone':user.uphone,
+               'uaddress':user.uaddress,
+               'good_info':views_list}
     return render(request, 'df_user/user_center_info.html', content)
 
+@user_decorater.login
 def order(request):
     content = {'title':'用户中心', 'user_page':1}
     return render(request, 'df_user/user_center_order.html', content)
+
+@user_decorater.login
 def site(request):
     user = UserInfo.objects.get(id=request.session.get('userid'))
     if request.method == 'POST':
@@ -91,6 +117,7 @@ def site(request):
         # phone_num = phone_num[0:3] + 'xxxx' + phone_num[7:11]
     content = {'title':'用户中心', 'user':user, 'user_page':1}
     return render(request, 'df_user/user_center_site.html', content)
+
 # def site_addinfo(request):
 #
 #     # post = request.POST
