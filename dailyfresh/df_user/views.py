@@ -1,5 +1,3 @@
-import sys
-sys.path.append('..')
 from django.shortcuts import render, redirect
 from hashlib import sha1
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
@@ -101,7 +99,7 @@ def info(request):
 
 @user_decorater.login
 def order(request):
-    content = {'title':'用户中心', 'user_page':1}
+    content = {'title':'全部订单', 'user_page':1}
     return render(request, 'df_user/user_center_order.html', content)
 
 @user_decorater.login

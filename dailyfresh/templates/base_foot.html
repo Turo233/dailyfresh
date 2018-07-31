@@ -6,7 +6,9 @@
 	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/main.css">
 	<script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
-	{% block linkscript %}{% endblock linkscript %}
+    {% block linkscript %}{% endblock linkscript %}
+
+
 
 </head>
 <body>
@@ -28,5 +30,9 @@
 	</div>
 {% block script_foot %}
 {% endblock script_foot %}
+<script type="text/javascript">
+{% block special %}
+{% endblock special %}
+</script>
 </body>
 </html>

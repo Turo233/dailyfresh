@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from .models import TypeInfo
 from .models import GoodsInfo
+
 # Create your views here.
 
 def index(request):
@@ -48,6 +49,7 @@ def detail(request, goods_id):
     goodinfo = GoodsInfo.objects.get(id=int(goods_id))
     goodinfo.goods_click += 1
     goodinfo.save()
+
 
     news = goodinfo.goods_type.goodsinfo_set.order_by('-id')[0:2]
     content = {
