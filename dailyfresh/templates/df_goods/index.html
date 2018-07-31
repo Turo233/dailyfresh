@@ -53,10 +53,10 @@
 				<span>|</span>
                 {% for info in type1 %}
 {#                    {{ info = info.split("·")[1] }}#}
-				<a href="\{{ info.id }}">{{ info.goods_title|F_delete_num|cut:'爱鲜蜂·'|truncatechars:'8'}}</a>
+				<a href="/goods/{{ info.id }}">{{ info.goods_title|F_delete_num|cut:'爱鲜蜂·'|truncatechars:'8'}}</a>
                 {% endfor %}
 			</div>
-			<a href="/list_1_1_1" class="goods_more fr" id="fruit_more">查看更多 ></a>
+			<a href="/goods/list_1_1_1" class="goods_more fr" id="fruit_more">查看更多 ></a>
 		</div>
 
 		<div class="goods_con clearfix">
@@ -64,8 +64,8 @@
 			<ul class="goods_list fl">
                 {% for img in type1 %}
 				<li>
-					<h4><a href="\{{ img.id }}">{{ img.goods_title|F_delete_num|cut:'爱鲜蜂·' |slice:'8'}}</a></h4>
-					<a href="\{{ img.id }}"><img src="{{ img.goods_pic }}"></a>
+					<h4><a href="/goods/{{ img.id }}">{{ img.goods_title|F_delete_num|cut:'爱鲜蜂·' |slice:'8'}}</a></h4>
+					<a href="/goods/{{ img.id }}"><img src="{{ img.goods_pic }}"></a>
 					<div class="prize">¥ {{ img.goods_price }}</div>
 				</li>
                 {% endfor %}
@@ -79,10 +79,10 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{% for info in type2 %}
-				<a href="\{{ info.id }}">{{ info.goods_title|slice:'5'|F_delete_num|cut:'爱鲜蜂·' }}</a>
+				<a href="/goods/{{ info.id }}">{{ info.goods_title|slice:'5'|F_delete_num|cut:'爱鲜蜂·' }}</a>
                 {% endfor %}
 			</div>
-			<a href="/list_2_1_1" class="goods_more fr">查看更多 ></a>
+			<a href="/goods/list_2_1_1" class="goods_more fr">查看更多 ></a>
 		</div>
 
 		<div class="goods_con clearfix">
@@ -90,8 +90,8 @@
 			<ul class="goods_list fl">
 				{% for img in type2 %}
 				<li>
-					<h4><a href="\{{ img.id }}">{{ img.goods_title|slice:'8'|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
-					<a href="\{{ img.id }}"><img src="{{ img.goods_pic }}"></a>
+					<h4><a href="/goods/{{ img.id }}">{{ img.goods_title|slice:'8'|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
+					<a href="/goods/{{ img.id }}"><img src="{{ img.goods_pic }}"></a>
 					<div class="prize">¥ {{ img.goods_price }}</div>
 				</li>
                 {% endfor %}
@@ -105,10 +105,10 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{% for info in type3 %}
-				<a href="\{{ info.id }}">{{ info.goods_title|slice:'5'|F_delete_num|cut:'爱鲜蜂·' }}</a>
+				<a href="/goods/{{ info.id }}">{{ info.goods_title|slice:'5'|F_delete_num|cut:'爱鲜蜂·' }}</a>
                 {% endfor %}
 			</div>
-			<a href="/list_3_1_1" class="goods_more fr">查看更多 ></a>
+			<a href="/goods/list_3_1_1" class="goods_more fr">查看更多 ></a>
 		</div>
 
 		<div class="goods_con clearfix">
@@ -116,8 +116,8 @@
 			<ul class="goods_list fl">
 				{% for img in type3 %}
 				<li>
-					<h4><a href="\{{ img.id }}">{{ img.goods_title|slice:'8'|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
-					<a href="\{{ img.id }}"><img src="{{ img.goods_pic }}"></a>
+					<h4><a href="/goods/{{ img.id }}">{{ img.goods_title|slice:'8'|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
+					<a href="/goods/{{ img.id }}"><img src="{{ img.goods_pic }}"></a>
 					<div class="prize">¥ {{ img.goods_price }}</div>
 				</li>
                 {% endfor %}
@@ -131,10 +131,10 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{% for info in type4 %}
-				<a href="\{{ info.id }}">{{ info.goods_title|slice:'5'|F_delete_num|cut:'爱鲜蜂·' }}</a>
+				<a href="/goods/{{ info.id }}">{{ info.goods_title|slice:'5'|F_delete_num|cut:'爱鲜蜂·' }}</a>
                 {% endfor %}
 			</div>
-			<a href="/list_4_1_1" class="goods_more fr">查看更多 ></a>
+			<a href="/goods/list_4_1_1" class="goods_more fr">查看更多 ></a>
 		</div>
 
 		<div class="goods_con clearfix">
@@ -142,8 +142,8 @@
 			<ul class="goods_list fl">
 				{% for img in type4 %}
 				<li>
-					<h4><a href="\{{ img.id }}">{{ img.goods_title|slice:'8'|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
-					<a href="\{{ img.id }}"><img src="{{ img.goods_pic }}"></a>
+					<h4><a href="/goods/{{ img.id }}">{{ img.goods_title|slice:'8'|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
+					<a href="/goods/{{ img.id }}"><img src="{{ img.goods_pic }}"></a>
 					<div class="prize">¥ {{ img.goods_price }}</div>
 				</li>
                 {% endfor %}
@@ -157,10 +157,10 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{% for info in type5 %}
-				<a href="\{{ info.id }}">{{ info.goods_title|slice:'5'|F_delete_num|cut:'爱鲜蜂·' }}</a>
+				<a href="/goods/{{ info.id }}">{{ info.goods_title|slice:'5'|F_delete_num|cut:'爱鲜蜂·' }}</a>
                 {% endfor %}
 			</div>
-			<a href="/list_5_1_1" class="goods_more fr">查看更多 ></a>
+			<a href="/goods/list_5_1_1" class="goods_more fr">查看更多 ></a>
 		</div>
 
 		<div class="goods_con clearfix">
@@ -168,8 +168,8 @@
 			<ul class="goods_list fl">
 				{% for img in type5 %}
 				<li>
-					<h4><a href="\{{ img.id }}">{{ img.goods_title|slice:'8'|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
-					<a href="\{{ img.id }}"><img src="{{ img.goods_pic }}"></a>
+					<h4><a href="/goods/{{ img.id }}">{{ img.goods_title|slice:'8'|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
+					<a href="/goods/{{ img.id }}"><img src="{{ img.goods_pic }}"></a>
 					<div class="prize">¥ {{ img.goods_price }}</div>
 				</li>
                 {% endfor %}
@@ -183,10 +183,10 @@
 			<div class="subtitle fl">
 				<span>|</span>
 				{% for info in type6 %}
-				<a href="\{{ info.id }}">{{ info.goods_title|slice:'5'|F_delete_num|cut:'爱鲜蜂·' }}</a>
+				<a href="/goods/{{ info.id }}">{{ info.goods_title|slice:'5'|F_delete_num|cut:'爱鲜蜂·' }}</a>
                 {% endfor %}
 			</div>
-			<a href="/list_6_1_1" class="goods_more fr">查看更多 ></a>
+			<a href="/goods/list_6_1_1" class="goods_more fr">查看更多 ></a>
 		</div>
 
 		<div class="goods_con clearfix">
@@ -194,8 +194,8 @@
 			<ul class="goods_list fl">
 				{% for img in type6 %}
 				<li>
-					<h4><a href="\{{ img.id }}">{{ img.goods_title|slice:'8'|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
-					<a href="\{{ img.id }}"><img src="{{ img.goods_pic }}"></a>
+					<h4><a href="/goods/{{ img.id }}">{{ img.goods_title|slice:'8'|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
+					<a href="/goods/{{ img.id }}"><img src="{{ img.goods_pic }}"></a>
 					<div class="prize">¥ {{ img.goods_price }}</div>
 				</li>
                 {% endfor %}

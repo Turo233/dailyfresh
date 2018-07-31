@@ -35,7 +35,7 @@ def cart_add(request, good_id, count):
         count = CartInfo.objects.filter(users_id=user_id).count()
         return JsonResponse({'count':count})
     else:
-        return redirect('/cart')
+        return redirect('/cart/')
 
 
 def cart_edit(request, cart_id, count):

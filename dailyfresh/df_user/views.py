@@ -43,7 +43,7 @@ def login(request):
 
 def logout(request):
     request.session.flush()
-    return redirect('/')
+    return redirect('/goods')
 
 def login_handle(request):
     post = request.POST
@@ -57,7 +57,7 @@ def login_handle(request):
         s1 = sha1()
         s1.update(upwd.encode("utf-8"))
         if s1.hexdigest() == users[0].upwd:
-            url = request.COOKIES.get('url','/index')
+            url = request.COOKIES.get('url','/goods')
             #密码验证成功， 转到info界面， 判断是否需要存cookie
             red = HttpResponseRedirect(url)
             if ucheck:

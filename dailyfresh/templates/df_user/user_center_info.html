@@ -25,8 +25,8 @@
 					<ul class="goods_type_list clearfix">
                         {% for good in good_info %}
                             <li>
-                            <a href="\{{ good.id }}"><img src="{{ good.goods_pic }}" alt="{{ good.goods_title|F_delete_num|cut:'爱鲜蜂·' }}"></a>
-                            <h4><a href="\{{ good.id }}">{{ good.goods_title|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
+                            <a href="/goods/{{ good.id }}"><img src="{{ good.goods_pic }}" alt="{{ good.goods_title|F_delete_num|cut:'爱鲜蜂·' }}"></a>
+                            <h4><a href="/goods/{{ good.id }}">{{ good.goods_title|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
                             <div class="operate">
 						    <span class="prize">￥{{ good.goods_price }}</span>
 						    <span class="unit">{{ good.goods_unit }}</span>
