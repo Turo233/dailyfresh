@@ -65,7 +65,6 @@ def detail(request, goods_id):
     goods_id = str(goodinfo.id)
     if goods_id_list != '':
         id_list = goods_id_list.split(',')
-        print("*"*29,id_list, goods_id)
         if id_list.count(goods_id) >= 1:
             id_list.remove(goods_id)
         id_list.insert(0,goods_id)

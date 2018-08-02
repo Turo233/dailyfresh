@@ -33,7 +33,7 @@ def cart_add(request, good_id, count):
     cart.save()
     if request.is_ajax():
         count = CartInfo.objects.filter(users_id=user_id).count()
-        return JsonResponse({'count':count})
+        return JsonResponse({'count':count, 'cart':cart.id})
     else:
         return redirect('/cart/')
 
@@ -57,3 +57,7 @@ def cart_delete(request, cart_id):
         data = {'status':0}
     return JsonResponse(data)
 
+def query_cart(request):
+    userid = request.session['userid']
+    count = CartInfo.objects.filter(users_id=userid).count()
+    return JsonResponse({'data':count})

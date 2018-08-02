@@ -24,7 +24,7 @@
 					<span>|</span>
 					<a href="/cart/">我的购物车</a>
 					<span>|</span>
-					<a href="/user/order/">我的订单</a>
+					<a href="/user/order_1/">我的订单</a>
 				</div>
 			</div>
 		</div>
@@ -58,8 +58,8 @@
 
 {% block special %}
     $(function() {
-        $.get('/cart/add_1_0/', function(data) {
-                $('#show_count').html(data.count);
+        $.get('/cart/query_cart', function(data) {
+                $('#show_count').html(data.data);
             })
     })
 {% endblock special %}

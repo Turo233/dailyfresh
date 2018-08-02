@@ -50,7 +50,7 @@
                     <div class="operate">
                         <span class="prize">{{ each.goods_price }}</span>
                         <span class="unit">{{ each.goods_unit }}</span>
-                        <a href="/cart/add_{{ each.id }}_1" class="add_goods" title="加入购物车"></a>
+                        <a href="/cart/add_{{ each.id }}_1/" class="add_goods" title="加入购物车"></a>
                     </div>
                 </li>
                 {% endfor %}
@@ -58,19 +58,19 @@
 
 			<div class="pagenation">
             {% if page.has_previous %}
-                <a href="/goods/list_{{ goodtype.id }}_{{ page.previous_page_number }}_{{ sortNum }}"><上一页</a>
+                <a href="/goods/list_{{ goodtype.id }}_{{ page.previous_page_number }}_{{ sortNum }}/"><上一页</a>
             {% endif %}
 
             {% for page_num in paginator.page_range %}
                 {% if page_num == page.number %}
-                    <a href="/goods/list_{{ goodtype.id }}_{{ page_num }}_{{ sortNum }}" class="active">{{ page_num }}</a>
+                    <a href="/goods/list_{{ goodtype.id }}_{{ page_num }}_{{ sortNum }}/" class="active">{{ page_num }}</a>
                     {% else %}
-                    <a href="/goods/list_{{ goodtype.id }}_{{ page_num }}_{{ sortNum }}">{{ page_num }}</a>
+                    <a href="/goods/list_{{ goodtype.id }}_{{ page_num }}_{{ sortNum }}/">{{ page_num }}</a>
                 {% endif %}
             {% endfor %}
 
             {% if page.has_next %}
-                <a href="/goods/list_{{ goodtype.id }}_{{ page.next_page_number }}_{{ sortNum }}">下一页></a>
+                <a href="/goods/list_{{ goodtype.id }}_{{ page.next_page_number }}_{{ sortNum }}/">下一页></a>
             {% endif %}
 			</div>
 		</div>

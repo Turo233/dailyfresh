@@ -5,10 +5,8 @@ register = template.Library()
 
 @register.filter(name='F_delete_num')
 def F_delete_num(data):
-    try:
-        pattern = '(.+?)\d'
-        data = re.findall(pattern, data)[0]
-        return data
-    except:
-        return data
+    if data == 1:
+        return '已支付'
+    else:
+        return '未支付'
 

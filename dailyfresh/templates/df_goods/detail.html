@@ -27,6 +27,21 @@
             $(".num_name span").text(num)
             $(".total em span").text(total.toFixed(2))
         }
+
+        {#立即购买->直接生成订单#}
+        $('.buy_btn').click(function () {
+            {#var count = $(".num_name span").text()#}
+            {#var cost = $(".total span").text()#}
+            {#var goodsid = {{ goodinfo.id }}#}
+            var num = parseInt($(".num_show").val())
+            var click = $(this)
+            $.get('/cart/add_{{ goodinfo.id }}_'+num+'/', function (data) {
+                cartid = data.cart
+                click.attr('href', '/order/pay?carts_id='+cartid)
+            })
+
+
+        })
     })
 
     </script>
@@ -102,7 +117,7 @@
     {% block script_foot %}
         <div class="add_jump"></div>
 
-	<script type="text/javascript" src="js/jquery-1.12.2.js"></script>
+{#	<script type="text/javascript" src="/static/js/jquery-1.12.4.js"></script>#}
 	<script type="text/javascript">
 		var $add_x = $('#add_cart').offset().top;
 		var $add_y = $('#add_cart').offset().left;
@@ -122,7 +137,7 @@
             });
 
             var num = parseInt($(".num_show").val())
-            $.get('/goods/add_{{ goodinfo.id }}_'+num, function (data) {
+            $.get('/cart/add_{{ goodinfo.id }}_'+num+'/', function (data) {
                 $('#show_count').html(data.count);
             })
 

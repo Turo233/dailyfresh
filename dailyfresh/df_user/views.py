@@ -3,7 +3,10 @@ from hashlib import sha1
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from .models import UserInfo
 from . import user_decorater
-from df_goods.views import GoodsInfo
+from df_goods.models import GoodsInfo
+from df_order.models import Order
+from django.core.paginator import Paginator
+
 # Create your views here.
 def register(request):
     return render(request, 'df_user/register.html')
@@ -98,8 +101,17 @@ def info(request):
     return render(request, 'df_user/user_center_info.html', content)
 
 @user_decorater.login
-def order(request):
-    content = {'title':'全部订单', 'user_page':1}
+def order(request, pageNum):
+    user_id = request.session.get("userid")
+    orders = Order.objects.filter(order_owner_id=user_id).order_by('-order_date').order_by('Ispay')
+    paginator = Paginator(orders, 2)
+    page = paginator.page(int(pageNum))
+
+    content = {'title':'全部订单',
+               'user_page':1,
+               'orders':orders,
+               'paginator':paginator,
+               'page':page}
     return render(request, 'df_user/user_center_order.html', content)
 
 @user_decorater.login
