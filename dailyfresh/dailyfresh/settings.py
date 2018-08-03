@@ -37,11 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 配置应用与第三方插件
     'df_user',
     'df_goods',
     'tinymce',
     'df_cart',
     'df_order',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +80,7 @@ WSGI_APPLICATION = 'dailyfresh.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# 本项目使用mysql数据库，需要进行配置
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -129,6 +132,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# 配置静态文件目录
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
@@ -137,8 +141,20 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media/')
 # 部署后的上传文件目录
 # MEDIA_ROOT = '/var/www/dadiyfresh/static' 部署
 
+# 富文本设置
 TINYMCE_DEFAULT_CONFIG = {
     'theme': 'advanced',
     'width': 600,
     'height': 400,
 }
+
+
+# 全文搜索
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+#自动生成索引
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

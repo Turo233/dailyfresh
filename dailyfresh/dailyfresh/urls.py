@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+# 配置路由
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^user/', include('df_user.urls')),
@@ -24,4 +25,5 @@ urlpatterns = [
     url(r'^order/', include('df_order.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^', include('df_goods.urls')),
+    # url(r'^search/', include('haystack.urls')),
 ]

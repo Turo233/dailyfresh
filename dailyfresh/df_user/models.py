@@ -9,4 +9,4 @@ class UserInfo(models.Model):
     uaddress = models.CharField(max_length=100, default='')
     upost = models.CharField(max_length=6, default='')
     uphone = models.CharField(max_length=11, default='')
-    # default, blank 是python层面的约束, 不影响数据库表结构
+    # default, blank 是python层面的约束, 不影响数据库表结构，可以直接进行添加修改，而不用进行迁移

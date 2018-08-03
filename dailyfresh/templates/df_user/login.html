@@ -6,6 +6,7 @@
 		uname_error = 0
 		upwd_error = 0
 
+        {#根据后台传输的数据进行显示#}
 		if ({{uname_error}} == 1) {
 		    $(".user_error").html("用户名不存在").show()
 		}
@@ -24,11 +25,7 @@
 				$('.name_input').next().hide();
 				error_name = false;
 			}
-
 		})
-
-
-
 	})
 
 </script>

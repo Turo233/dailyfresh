@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from . import views
 
+# 配置路由
 urlpatterns = [
     url(r'^add_(\d+)_(\d+)/$', views.cart_add),
     url(r'^edit_(\d+)_(\d+)/$', views.cart_edit),

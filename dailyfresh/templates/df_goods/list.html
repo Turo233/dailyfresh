@@ -58,7 +58,7 @@
 
 			<div class="pagenation">
             {% if page.has_previous %}
-                <a href="/goods/list_{{ goodtype.id }}_{{ page.previous_page_number }}_{{ sortNum }}/"><上一页</a>
+                <a href="/goods/list_{{ goodtype.id }}_{{ page.previous_page_number }}_{{ sortNum }}/">上一页</a>
             {% endif %}
 
             {% for page_num in paginator.page_range %}

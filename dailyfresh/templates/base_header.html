@@ -34,16 +34,23 @@
 		<a href="/" class="logo fl"><img src="/static/images/logo.png"></a>
         {% if user_page == 1 %}
             <div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;{{ title }}</div>
-            <div class="search_con fr">
-                <input type="text" class="input_text fl" name="" placeholder="搜索商品">
-                <input type="button" class="input_btn fr" name="" value="搜索">
+            <div class="fr">
+                <form method='get' action="/search/" target="_blank" class="search_con fr">
+                    <input type="text" class="input_text fl" name="q" placeholder="搜索商品">
+                    <input type="submit" class="input_btn fr" value="搜索">
+                </form>
             </div>
         {% endif %}
+
         {% if market_page == 1 %}
-            <div class="search_con fl">
-                <input type="text" class="input_text fl" name="" placeholder="搜索商品">
-                <input type="button" class="input_btn fr" name="" value="搜索">
+            <div class="fl">
+            <form method='get' action="/search/" target="_blank" class="search_con fr">
+                <input type="text" class="input_text fl" name="q" placeholder="搜索商品">
+                <input type="submit" class="input_btn fr" value="搜索">
+            </form>
+
             </div>
+
             <div class="guest_cart fr">
                 <a href="/cart" class="cart_name fl">我的购物车</a>
                 <div class="goods_count fl" id="show_count"></div>
@@ -57,6 +64,7 @@
 {% endblock body %}
 
 {% block special %}
+{#    对其他页购物车内商品的数量进行显示#}
     $(function() {
         $.get('/cart/query_cart', function(data) {
                 $('#show_count').html(data.data);

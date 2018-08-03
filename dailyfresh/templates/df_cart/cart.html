@@ -3,28 +3,10 @@
 
 {% block linkscript %}
     <script type="text/javascript">
-        {#计算总金额/数量#}
-        function total() {
-            total_amount = 0
-            total_account = 0
-            $(".col07").each(function () {
-                var num = $(this).prev().find('input').val()
-                var price = $(this).prev().prev().text()
-                var amount = parseInt(num) * parseFloat(price)
-                $(this).text(amount.toFixed(2))
-
-                if ($(this).prevAll().find(':checkbox').prop('checked')) {
-                    total_amount += amount
-                    total_account += 1
-                }
-
-            })
-            $(".col03 em").text(total_amount.toFixed(2))
-            $(".col03 b").text(total_account)
-        }
-
         $(function () {
+            {#先进行一次显示#}
             total();
+
             {#全选/全否#}
             $("#check_all").click(function () {
                 console.log($("#check_all"))
@@ -32,7 +14,8 @@
                 $(":checkbox:not(#check_all)").prop('checked', states)
                 total()
             })
-            {# 选择 #}
+
+            {# 选择单项 #}
             $(":checkbox:not(#check_all)").click(function () {
                 if ($(this).prop("checked")) {
                     if ($(":checked").length + 1 == $(":checkbox").length) {
@@ -43,12 +26,12 @@
                 }
                 total()
             })
+
             {#删除#}
             $(".col08").click(function () {
                 good_id = $(this).parents('.cart_list_td').attr('id')
                 if (confirm("确定要删除嘛？")) {
                     $.get('/cart/delete_' + good_id+'/', function (data) {
-
                         if (data.status == 1) {
                             $("ul").remove('#'+good_id)
                             total();
@@ -56,11 +39,13 @@
                     })
                 }
             })
+
             {#增加#}
             $(".add").click(function () {
                 text = $(this).prev()
                 text.val(parseInt(text.val()) + 1).blur()
             })
+
             {#减少#}
             $(".minus").click(function () {
                 text = $(this).next()
@@ -68,6 +53,7 @@
                     text.val(parseInt(text.val()) - 1).blur()
                 }
             })
+
             {#改变数量#}
             $(".num_show").blur(function () {
                 count = $(this).val()
@@ -90,9 +76,9 @@
 
             {#给提交订单添加事件#}
             $(".col04 a").click(function () {
-                {#创建新的数组来存放需要get发送的数据#}
+                {#创建新的数组来存放需要get发送的数据随后进行字符串拼接#}
                 var carts_id = new Array()
-                {#判断是否被选择，选择的才添加#}
+                {#判断是否被选择，选择的才添加入订单#}
                 $(":checkbox:not(#check_all)").each(function () {
                     good_id = $(this).parents('.cart_list_td').attr('id');
                     if ($(this).prop("checked")) {
@@ -103,6 +89,26 @@
                 {#改变当前链接的href属性#}
                 $(this).attr('href', '/order/pay?'+carts_id.join("&"))
             })
+
+            {#计算总金额/数量#}
+            function total() {
+            total_amount = 0
+            total_account = 0
+            $(".col07").each(function () {
+                var num = $(this).prev().find('input').val()
+                var price = $(this).prev().prev().text()
+                var amount = parseInt(num) * parseFloat(price)
+
+                $(this).text(amount.toFixed(2))
+
+                if ($(this).prevAll().find(':checkbox').prop('checked')) {
+                    total_amount += amount
+                    total_account += 1
+                }
+            })
+            $(".col03 em").text(total_amount.toFixed(2))
+            $(".col03 b").text(total_account)
+        }
         })
     </script>
 {% endblock linkscript %}

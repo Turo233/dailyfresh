@@ -5,7 +5,7 @@ $(function(){
 	var error_email = false;
 	var error_check = false;
 
-
+	// 离焦时处理
 	$('#user_name').blur(function() {
 		check_user_name();
 	});
@@ -36,7 +36,7 @@ $(function(){
 		}
 	});
 
-
+	// 判断输入信息的格式是否有误
 	function check_user_name(){
 		var len = $('#user_name').val().length;
 		var username = $('#user_name').val()
@@ -78,7 +78,6 @@ $(function(){
 			error_password = false;
 		}
 	}
-
 
 	function check_cpwd(){
 		var pass = $('#pwd').val();
@@ -122,12 +121,13 @@ $(function(){
 		check_cpwd();
 		check_email();
 
-		if(error_name == false && error_password == false && error_check_password == false && error_email == false && error_check == false)
-		{
+		if( error_name == false &&
+			error_password == false &&
+			error_check_password == false &&
+			error_email == false &&
+			error_check == false) {
 			return true;
-		}
-		else
-		{
+		} else {
 			return false;
 		}
 

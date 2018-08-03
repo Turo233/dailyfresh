@@ -3,15 +3,15 @@
 {% block linkscript %}
     <script type="text/javascript">
         $(function () {
-            {#总价钱计算#}
 
+            {#总价钱计算#}
             function total() {
                 var total_cost = 0
                 var account = 0
                 $(".goods_list_td").each(function () {
                     var num = parseInt($(this).find('.col06').text())
                     var price = parseFloat($(this).find('.col05 span').text())
-                    {#小计计算#}
+                    {#计算小计#}
                     total_price = num * price
                     $(this).find('.col07 span').text(total_price)
                     total_cost += total_price

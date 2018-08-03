@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.core.paginator import Paginator
 from .models import TypeInfo
 from .models import GoodsInfo
 
 # Create your views here.
 
+# 生成商品主页，根据类别分组
 def index(request):
     TypeInfo_list = TypeInfo.objects.all()
     id_1_info = TypeInfo_list[0].goodsinfo_set.order_by('-id')[0:4]
@@ -24,6 +26,7 @@ def index(request):
                }
     return render(request, 'df_goods/index.html', content)
 
+# 商品列表页，根据类型分组，可以进行排序
 def list(request, typeNum, pageNum, sortNum):
     goodtype = TypeInfo.objects.get(id=int(typeNum))
     news = goodtype.goodsinfo_set.order_by('-id')[0:2]
@@ -45,12 +48,12 @@ def list(request, typeNum, pageNum, sortNum):
                'news':news}
     return render(request, 'df_goods/list.html', content)
 
+# 商品详情页
 def detail(request, goods_id):
     goodinfo = GoodsInfo.objects.get(id=int(goods_id))
     goodinfo.goods_click += 1
     goodinfo.save()
-
-
+    # 商品推荐
     news = goodinfo.goods_type.goodsinfo_set.order_by('-id')[0:2]
     content = {
         'title':goodinfo.goods_type.type_title,
@@ -60,18 +63,29 @@ def detail(request, goods_id):
     }
     response = render(request, 'df_goods/detail.html', content)
 
-    # 用户最近浏览
+    # 添加用户最近浏览
     goods_id_list = request.COOKIES.get('goods_ids', '')
     goods_id = str(goodinfo.id)
     if goods_id_list != '':
         id_list = goods_id_list.split(',')
+        # 判断浏览物品是否已存在于最近浏览中
         if id_list.count(goods_id) >= 1:
             id_list.remove(goods_id)
-        id_list.insert(0,goods_id)
+        id_list.insert(0, goods_id)
         if len(id_list) >= 6:
             id_list.pop(-1)
         goods_id_list = ','.join(id_list)
     else:
         goods_id_list = goods_id
-    response.set_cookie('goods_ids',goods_id_list)
+    response.set_cookie('goods_ids', goods_id_list)
     return response
+
+
+# 全文检索自定义传输内容
+from haystack.views import SearchView
+class MySearchView(SearchView):
+    def extra_context(self):
+        context = super(MySearchView, self).extra_context()
+        context['title'] = '搜索'
+        context['market_page'] = 1
+        return context

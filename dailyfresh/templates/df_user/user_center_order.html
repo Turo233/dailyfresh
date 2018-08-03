@@ -1,34 +1,33 @@
 {% extends 'base_header.html' %}
 {% load custom_filter %}
 {% block linkscript %}
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        $(function () {
-            $('.order_pay').each(function () {
-
-                if ($(this).val() == '已付款'){
-                    $(this).attr("disabled", true)
-                }
-
-            })
-                $('.order_pay').click(function () {
-                    var money = parseFloat($(this).parent().prev().find('span').text()).toFixed(2)
-                    var order_id = $(this).parent().parent().parent().parent().prev().find('.order_id span').text()
-                    var status = $(this)
-                    if (confirm('确定支付>'+money+'<元吗?')) {
-                        $.post('/order/conifrm_'+ order_id +'/', function (data) {
-                            if (data.status == 1){
-                                status.val('已完成')
-                                window.location.reload();
-                            }else{
-                                console.assert('支付失败')
-                            }
-                        })
-                    }
-                })
+    $(function () {
+        $('.order_pay').each(function () {
+            if ($(this).val() == '已付款'){
+                $(this).attr("disabled", true)
+            }
         })
 
-    </script>
+        $('.order_pay').click(function () {
+            var money = parseFloat($(this).parent().prev().find('span').text()).toFixed(2)
+            var order_id = $(this).parent().parent().parent().parent().prev().find('.order_id span').text()
+            var status = $(this)
+            if (confirm('确定支付>'+money+'<元吗?')) {
+                $.post('/order/conifrm_'+ order_id +'/', function (data) {
+                    if (data.status == 1){
+                        status.val('已完成')
+                        window.location.reload();
+                    }else{
+                        console.assert('支付失败')
+                    }
+                })
+            }
+        })
+    })
+
+</script>
 {% endblock linkscript %}
 {% block body %}
 <div class="main_con clearfix">
@@ -72,7 +71,6 @@
 				</td>
                 <td width="15%" class="total_cost">总价：<span>{{ each_item.order_total }}</span></td>
 				<td width="15%"><input type="submit" class="oper_btn order_pay" value="{{ each_item.Ispay|select_tf_pay }}"></td>
-{#            <a href="javascript:;" class="oper_btn order_pay">{{ each_item.Ispay|select_tf_pay }}</a>#}
 			</tr>
 		</tbody>
 	</table>

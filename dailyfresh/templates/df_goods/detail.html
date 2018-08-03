@@ -6,9 +6,9 @@
         var num = parseInt($(".num_show").val())
         var price = parseFloat($(".show_pirze em").text())
 
+        {#输入数字显示#}
         $(".num_show").blur(function(){
             num = parseInt($(".num_show").val())
-
             show()
         })
         $(".add").click(function(){
@@ -30,20 +30,14 @@
 
         {#立即购买->直接生成订单#}
         $('.buy_btn').click(function () {
-            {#var count = $(".num_name span").text()#}
-            {#var cost = $(".total span").text()#}
-            {#var goodsid = {{ goodinfo.id }}#}
             var num = parseInt($(".num_show").val())
             var click = $(this)
             $.get('/cart/add_{{ goodinfo.id }}_'+num+'/', function (data) {
                 cartid = data.cart
                 click.attr('href', '/order/pay?carts_id='+cartid)
             })
-
-
         })
     })
-
     </script>
 {% endblock linkscript %}
     {% block others %}
