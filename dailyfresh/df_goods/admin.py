@@ -12,3 +12,4 @@ class Goods_info_admin(admin.ModelAdmin):
                     'goods_unit','goods_click',
                     'goods_stock','goods_type']
     list_per_page = 15
+

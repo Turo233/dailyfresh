@@ -10,3 +10,5 @@ class UserInfo(models.Model):
     upost = models.CharField(max_length=6, default='')
     uphone = models.CharField(max_length=11, default='')
     # default, blank 是python层面的约束, 不影响数据库表结构，可以直接进行添加修改，而不用进行迁移
+    def __str__(self):
+        return '{} - {} '.format(self.id, self.uname)

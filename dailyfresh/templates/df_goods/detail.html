@@ -21,22 +21,14 @@
             }
             show()
         })
+
+
         function show(){
             var total = num * price
             $(".num_show").val(num)
             $(".num_name span").text(num)
             $(".total em span").text(total.toFixed(2))
         }
-
-        {#立即购买->直接生成订单#}
-        $('.buy_btn').click(function () {
-            var num = parseInt($(".num_show").val())
-            var click = $(this)
-            $.get('/cart/add_{{ goodinfo.id }}_'+num+'/', function (data) {
-                cartid = data.cart
-                click.attr('href', '/order/pay?carts_id='+cartid)
-            })
-        })
     })
     </script>
 {% endblock linkscript %}
@@ -69,7 +61,7 @@
 			</div>
 			<div class="total">总价：<em><span>{{ goodinfo.goods_price }}</span>元</em></div>
 			<div class="operate_btn">
-				<a href="javascript:;" class="buy_btn">立即购买</a>
+				<a href="/cart/{{ add_goodsinfo.id }}_1/" class="buy_btn">立即购买</a>
 				<a href="javascript:;" class="add_cart" id="add_cart">加入购物车</a>				
 			</div>
 		</div>
@@ -113,6 +105,9 @@
 
 {#	<script type="text/javascript" src="/static/js/jquery-1.12.4.js"></script>#}
 	<script type="text/javascript">
+    $(function () {
+
+
 		var $add_x = $('#add_cart').offset().top;
 		var $add_y = $('#add_cart').offset().left;
 
@@ -121,8 +116,9 @@
 
 
         $(".add_jump").css({'left':$add_y+80,'top':$add_x+10,'display':'block'})
-        $('#add_cart').click(function(){
 
+
+        $('#add_cart').click(function(){
             $(".add_jump").stop().animate({
                 'left': $to_y+7,
                 'top': $to_x+7},
@@ -134,9 +130,12 @@
             $.get('/cart/add_{{ goodinfo.id }}_'+num+'/', function (data) {
                 $('#show_count').html(data.count);
             })
+        })
 
 
-		})
+
+
+        })
 	</script>
 
     {% endblock script_foot %}

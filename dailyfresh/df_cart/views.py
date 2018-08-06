@@ -18,6 +18,7 @@ def cart(request):
     }
     return render(request, 'df_cart/cart.html', content)
 
+
 # 详情页和列表页的商品添加处理
 @user_decorater.login
 def cart_add(request, good_id, count):
@@ -42,6 +43,7 @@ def cart_add(request, good_id, count):
     else:
         return redirect('/cart/')
 
+
 # 对购物车的内容修改进行处理
 def cart_edit(request, cart_id, count):
     try:
@@ -65,6 +67,10 @@ def cart_delete(request, cart_id):
 
 # 在其他页面显示购物车中内容数量
 def query_cart(request):
-    userid = request.session['userid']
-    count = CartInfo.objects.filter(users_id=userid).count()
-    return JsonResponse({'data':count})
+    if request.session.has_key('userid'):
+        userid = request.session['userid']
+        count_info = CartInfo.objects.filter(users_id=userid).count()
+    else:
+        count_info = '未登录'
+    return JsonResponse({'data':count_info})
+

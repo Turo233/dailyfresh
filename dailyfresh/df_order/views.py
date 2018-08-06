@@ -6,6 +6,7 @@ from .models import *
 from datetime import datetime
 from decimal import Decimal
 from django.db import transaction
+from df_user import user_decorater
 # Create your views here.
 
 # 通过get的方式获取订单信息并进行存储
