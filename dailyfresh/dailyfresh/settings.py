@@ -37,12 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 配置应用与第三方插件
+    # 我的应用
     'df_user',
     'df_goods',
-    'tinymce',
     'df_cart',
     'df_order',
+
+    # 第三方插件
+    'tinymce',
     'haystack',
 ]
 
@@ -118,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 

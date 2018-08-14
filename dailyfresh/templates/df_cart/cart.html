@@ -32,6 +32,7 @@
                 good_id = $(this).parents('.cart_list_td').attr('id')
                 if (confirm("确定要删除嘛？")) {
                     $.get('/cart/delete_' + good_id+'/', function (data) {
+                    {#$.get('{% url 'cart:delete' good_id %}', function (data) {#}
                         if (data.status == 1) {
                             $("ul").remove('#'+good_id)
                             total();
@@ -64,6 +65,7 @@
                     console.log("haha")
                     good_id = $(this).parents('.cart_list_td').attr('id');
                     $.get('/cart/edit_' + good_id + '_' + count+'/', function (data) {
+                    {#$.get('{% url 'cart:edit' good_id count %}, function (data) {#}
                         if (data.ok == 0) {
                             total()
                         } else {

@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.http import request, JsonResponse
+from django.shortcuts import render
+from django.http import request, JsonResponse, HttpResponseRedirect
 from df_cart.models import CartInfo
 from df_user.models import UserInfo
 from .models import *
@@ -7,6 +7,7 @@ from datetime import datetime
 from decimal import Decimal
 from django.db import transaction
 from df_user import user_decorater
+from django.urls import reverse
 # Create your views here.
 
 # 通过get的方式获取订单信息并进行存储
@@ -76,7 +77,7 @@ def order_handle(request):
                 cart_info.delete()
             else:
                 transaction.savepoint_rollback(tran_origin)
-                return redirect('/cart/')
+                return HttpResponseRedirect(reverse('cart:cart'))
         #保存总价格
         order.order_total = order_cost + 10
         order.save()
@@ -84,7 +85,7 @@ def order_handle(request):
     except Exception as e:
         print(e)
         transaction.savepoint_rollback(tran_origin)
-    return redirect('/user/order_1')
+    return HttpResponseRedirect(reverse('user:order', args=(1,)))
 
 # 假装支付。。。
 def order_confirm(request, order_id):

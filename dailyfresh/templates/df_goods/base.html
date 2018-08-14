@@ -7,12 +7,12 @@
 				<h1>全部商品分类</h1>
 				<span></span>
 				<ul class="subnav">
-					<li><a href="/goods/list_1_1_1/" class="fruit">特色水果</a></li>
-					<li><a href="/goods/list_2_1_1/" class="seafood">营养小餐</a></li>
-					<li><a href="/goods/list_3_1_1/" class="meet">好吃零食</a></li>
-					<li><a href="/goods/list_4_1_1/" class="egg">啤酒饮料</a></li>
-					<li><a href="/goods/list_5_1_1/" class="vegetables">临时充饥</a></li>
-					<li><a href="/goods/list_6_1_1/" class="ice">家用酱品</a></li>
+                    <li><a href="{% url 'goods:list' 1 1 1 %}" class="fruit">特色水果</a></li>
+					<li><a href="{% url 'goods:list' 2 1 1 %}" class="seafood">营养小餐</a></li>
+					<li><a href="{% url 'goods:list' 3 1 1 %}" class="meet">好吃零食</a></li>
+					<li><a href="{% url 'goods:list' 4 1 1 %}" class="egg">啤酒饮料</a></li>
+					<li><a href="{% url 'goods:list' 5 1 1 %}" class="vegetables">临时充饥</a></li>
+					<li><a href="{% url 'goods:list' 6 1 1 %}" class="ice">家用酱品</a></li>
 				</ul>
 			</div>
 			<ul class="navlist fl">

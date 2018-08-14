@@ -19,11 +19,11 @@ from django.contrib import admin
 # 配置路由
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^user/', include('df_user.urls')),
-    url(r'^goods/', include('df_goods.urls')),
-    url(r'^cart/', include('df_cart.urls')),
-    url(r'^order/', include('df_order.urls')),
-    url(r'^tinymce/', include('tinymce.urls')),
-    url(r'^', include('df_goods.urls')),
+    url(r'^user/', include('df_user.urls', namespace='user')),
+    url(r'^goods/', include('df_goods.urls', namespace='goods')),
+    url(r'^cart/', include('df_cart.urls', namespace='cart')),
+    url(r'^order/', include('df_order.urls', namespace='order')),
+    url(r'^tinymce/', include('tinymce.urls', namespace='tinymce')),
+    url(r'^', include('df_goods.urls', namespace='index')),
     # url(r'^search/', include('haystack.urls')),
 ]

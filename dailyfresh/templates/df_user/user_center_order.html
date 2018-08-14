@@ -2,7 +2,6 @@
 {% load custom_filter %}
 {% block linkscript %}
 <script type="text/javascript">
-
     $(function () {
         $('.order_pay').each(function () {
             if ($(this).val() == '已付款'){
@@ -15,10 +14,11 @@
             var order_id = $(this).parent().parent().parent().parent().prev().find('.order_id span').text()
             var status = $(this)
             if (confirm('确定支付>'+money+'<元吗?')) {
-                $.post('/order/conifrm_'+ order_id +'/', function (data) {
+                $.post('/order/confirm_'+ order_id +'/', function (data) {
                     if (data.status == 1){
                         status.val('已完成')
-                        window.location.reload();
+                        setTimeout(function () { window.location.reload(); }, 1000);
+
                     }else{
                         console.assert('支付失败')
                     }
@@ -34,9 +34,9 @@
 		<div class="left_menu_con clearfix">
 			<h3>用户中心</h3>
 			<ul>
-				<li><a href="/user/info/" >· 个人信息</a></li>
-				<li><a href="/user/order_1/" class="active">· 全部订单</a></li>
-				<li><a href="/user/site/">· 收货地址</a></li>
+				<li><a href="{% url 'user:info' %}" >· 个人信息</a></li>
+				<li><a href="{% url 'user:order' 1 %}" class="active">· 全部订单</a></li>
+				<li><a href="{% url 'user:site' %}">· 收货地址</a></li>
 			</ul>
 		</div>
 <div class="right_content clearfix">
@@ -79,19 +79,18 @@
 
 	<div class="pagenation">
 		{% if page.has_previous %}
-                <a href="/user/order_{{ page.previous_page_number }}/"><上一页</a>
+                <a href="{% url 'user:order' page.previous_page_number %}"><上一页</a>
         {% endif %}
-
         {% for page_num in paginator.page_range %}
             {% if page_num == page.number %}
-                <a href="/user/order_{{ page_num }}/" class="active">{{ page_num }}</a>
+                <a href="{% url 'user:order' page_num %}" class="active">{{ page_num }}</a>
                 {% else %}
-                <a href="/user/order_{{ page_num }}/">{{ page_num }}</a>
+                <a href="{% url 'user:order' page_num %}">{{ page_num }}</a>
             {% endif %}
         {% endfor %}
 
         {% if page.has_next %}
-            <a href="/user/order_{{ page.next_page_number }}/">下一页></a>
+            <a href="{% url 'user:order' page.next_page_number %}">下一页></a>
         {% endif %}
 	</div>
 </div>

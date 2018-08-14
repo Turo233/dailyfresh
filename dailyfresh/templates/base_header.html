@@ -6,32 +6,32 @@
 			<div class="fr">
                 {% if request.session.uname|default:'' != '' %}
 				<div class="login_btn fl">
-					欢迎您：<em><a href="/user/info">{{request.session.uname}}</a></em>
+					欢迎您：<em><a href="{% url 'user:info' %}">{{request.session.uname}}</a></em>
                     <span>|</span>
-				<a href="/user/logout">退出</a>
+				<a href="{% url 'user:logout' %}">退出</a>
                 </div>
                 {% else %}
 				<div class="login_btn fl">
-					<a href="/user/login/">登录</a>
+					<a href="{% url 'user:login' %}">登录</a>
 					<span>|</span>
-					<a href="/user/register/">注册</a>
+					<a href="{% url 'user:register' %}">注册</a>
 				</div>
                 {% endif %}
 
 				<div class="user_link fl">
 					<span>|</span>
-					<a href="/user/info/">用户中心</a>
+					<a href="{% url 'user:info' %}">用户中心</a>
 					<span>|</span>
-					<a href="/cart/">我的购物车</a>
+					<a href="{% url 'cart:cart' %}">我的购物车</a>
 					<span>|</span>
-					<a href="/user/order_1/">我的订单</a>
+					<a href="{% url 'user:order' 1 %}">我的订单</a>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="search_bar clearfix">
-		<a href="/" class="logo fl"><img src="/static/images/logo.png"></a>
+		<a href="{% url 'goods:index' %}" class="logo fl"><img src="/static/images/logo.png"></a>
         {% if user_page == 1 %}
             <div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;{{ title }}</div>
             <div class="fr">
@@ -52,7 +52,7 @@
             </div>
 
             <div class="guest_cart fr">
-                <a href="/cart" class="cart_name fl">我的购物车</a>
+                <a href="{% url 'cart:cart' %}" class="cart_name fl">我的购物车</a>
                 <div class="goods_count fl" id="show_count"></div>
             </div>
         {% endif %}

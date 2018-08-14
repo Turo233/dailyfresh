@@ -5,9 +5,9 @@
 		<div class="left_menu_con clearfix">
 			<h3>用户中心</h3>
 			<ul>
-				<li><a href="/user/info/" class="active">· 个人信息</a></li>
-				<li><a href="/user/order_1/">· 全部订单</a></li>
-				<li><a href="/user/site/">· 收货地址</a></li>
+				<li><a href="{% url 'user:info' %}" class="active">· 个人信息</a></li>
+				<li><a href="{% url 'user:order' 1 %}">· 全部订单</a></li>
+				<li><a href="{% url 'user:site' %}">· 收货地址</a></li>
 			</ul>
 		</div>
 		<div class="right_content clearfix">
@@ -25,8 +25,8 @@
 					<ul class="goods_type_list clearfix">
                         {% for good in good_info %}
                             <li>
-                            <a href="/goods/{{ good.id }}"><img src="{{ good.goods_pic }}" alt="{{ good.goods_title|F_delete_num|cut:'爱鲜蜂·' }}"></a>
-                            <h4><a href="/goods/{{ good.id }}">{{ good.goods_title|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
+                            <a href="{% url 'goods:detail' good.id %}"><img src="{{ good.goods_pic }}" alt="{{ good.goods_title|F_delete_num|cut:'爱鲜蜂·' }}"></a>
+                            <h4><a href="{% url 'goods:detail' good.id %}">{{ good.goods_title|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
                             <div class="operate">
 						    <span class="prize">￥{{ good.goods_price }}</span>
 						    <span class="unit">{{ good.goods_unit }}</span>
@@ -34,11 +34,6 @@
 					        </div>
                             </li>
                         {% endfor %}
-
-
-
-
-
 			</ul>
 		</div>
 		</div>

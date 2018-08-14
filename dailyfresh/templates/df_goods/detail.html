@@ -34,9 +34,9 @@
 {% endblock linkscript %}
     {% block others %}
 	<div class="breadcrumb">
-		<a href="/goods/#model01">全部分类</a>
+        <a href="/goods/#model01">全部分类</a>
 		<span>></span>
-		<a href="/goods/list_{{ goodinfo.goods_type.id }}_1_1">{{ goodinfo.goods_type.type_title }}</a>
+		<a href="{% url 'goods:list' goodinfo.goods_type.id 1 1 %}">{{ goodinfo.goods_type.type_title }}</a>
 		<span>></span>
 		<a href="#">商品详情</a>
 	</div>
@@ -61,7 +61,7 @@
 			</div>
 			<div class="total">总价：<em><span>{{ goodinfo.goods_price }}</span>元</em></div>
 			<div class="operate_btn">
-				<a href="/cart/{{ add_goodsinfo.id }}_1/" class="buy_btn">立即购买</a>
+                <a href="{% url 'cart:add' goodinfo.id 1 %}" class="buy_btn">立即购买</a>
 				<a href="javascript:;" class="add_cart" id="add_cart">加入购物车</a>				
 			</div>
 		</div>
@@ -74,8 +74,8 @@
 				<ul>
                     {% for each in news %}
 					<li>
-						<a href="/goods/{{ each.id }}"><img src="{{ each.goods_pic }}"></a>
-						<h4><a href="/goods/{{ each.id }}">{{ each.goods_title|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
+						<a href="{% url 'goods:detail' each.id %}"><img src="{{ each.goods_pic }}"></a>
+						<h4><a href="{% url 'goods:detail' each.id %}">{{ each.goods_title|F_delete_num|cut:'爱鲜蜂·' }}</a></h4>
 						<div class="prize">{{ each.goods_price }}</div>
 					</li>
 					{% endfor %}
@@ -131,11 +131,7 @@
                 $('#show_count').html(data.count);
             })
         })
-
-
-
-
-        })
+    })
 	</script>
 
     {% endblock script_foot %}

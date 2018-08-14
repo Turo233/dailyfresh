@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
-from django.http import request, JsonResponse
+from django.shortcuts import render
+from django.http import request, JsonResponse, HttpResponseRedirect
 from df_user import user_decorater
 from .models import CartInfo
 from df_goods.models import GoodsInfo
+from django.urls import reverse
 # Create your views here.
 
 # 购物车页面加载处理
@@ -41,7 +42,7 @@ def cart_add(request, good_id, count):
         count = CartInfo.objects.filter(users_id=user_id).count()
         return JsonResponse({'count':count, 'cart':cart.id})
     else:
-        return redirect('/cart/')
+        return HttpResponseRedirect(reverse('cart:cart'))
 
 
 # 对购物车的内容修改进行处理

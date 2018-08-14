@@ -32,7 +32,7 @@
 {% endblock linkscript %}
 {% block body %}
 	<div class="login_top clearfix">
-		<a href="/goods" class="login_logo"><img src="/static/images/logo02.png"></a>
+		<a href="{% url 'goods:index' %}" class="login_logo"><img src="/static/images/logo02.png"></a>
 	</div>
 
 	<div class="login_form_bg">
@@ -42,10 +42,11 @@
 			<div class="login_form fr">
 				<div class="login_title clearfix">
 					<h1>用户登录</h1>
-					<a href="/user/register/">立即注册</a>
+					<a href="{% url 'user:register' %}">立即注册</a>
 				</div>
 				<div class="form_input">
-					<form action="/user/login_handle/" method="post">
+					<form action="{% url 'user:lohandle' %}" method="post">
+                        {% csrf_token %}
 						<input type="text" name="username" class="name_input" value="{{namevalue}}" placeholder="请输入用户名">
 						<div class="user_error">输入错误</div>
 						<input type="password" name="pwd" class="pass_input" value="{{pwdvalue}}"  placeholder="请输入密码">

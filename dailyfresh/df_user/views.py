@@ -6,6 +6,7 @@ from . import user_decorater
 from df_goods.models import GoodsInfo
 from df_order.models import Order
 from django.core.paginator import Paginator
+from django.urls import reverse
 
 # Create your views here.
 
@@ -22,7 +23,7 @@ def register_handle(request):
     uemail = post.get('email')
     # 判断两个密码是否一致
     if upwd != upwd2:
-        return redirect('/user/register')
+        return HttpResponseRedirect(reverse('user:register'))
     # 密码加密
     s1 = sha1()
     s1.update(upwd.encode('utf-8'))
@@ -34,7 +35,7 @@ def register_handle(request):
     user.uemail = uemail
     user.save()
     #注册成功, 转到登录页面
-    return redirect('/user/login/')
+    return HttpResponseRedirect(reverse('user:login'))
 
 # 检查用户名是否已存在
 def checkuserid(request):
@@ -52,7 +53,7 @@ def login(request):
 # 注销清空session并返回主页
 def logout(request):
     request.session.flush()
-    return redirect('/')
+    return HttpResponseRedirect(reverse('goods:index'))
 
 # 对登录信息进行验证
 def login_handle(request):

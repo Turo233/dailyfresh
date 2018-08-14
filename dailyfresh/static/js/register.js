@@ -46,16 +46,16 @@ $(function(){
 			$('#user_name').next().show();
 			error_name = true;
 		}else{
-
 			$.post("/user/checkuserid/", {"uname":username}, function(data){
 
-				if (data.count == 1){
-					$('#user_name').next().html('该用户已存在, 请重新输入').show();
-					error_name = true;
-				}else {
+				if (data.count != 1){
 					$('#user_name').next().hide();
 					error_name = false;
-
+				}else {
+					setTimeout(function () {
+						$('#user_name').next().html('该用户已存在, 请重新输入').show();
+					}, 800);
+					error_name = true;
 
 				}
 
